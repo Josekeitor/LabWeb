@@ -13,3 +13,12 @@ exports.divide = function (a, b) {
 exports.substract = function (a, b) {
   return a - b;
 };
+
+const validOperations = {
+  "+": exports.add,
+  "-": exports.substract,
+  "*": exports.multiply,
+  "/": exports.divide,
+};
+
+exports.validOperations = validOperations;

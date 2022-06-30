@@ -6,22 +6,15 @@ const middleman = readline.createInterface({
   output: process.stdout,
 });
 
-const validOperations = {
-  "+": basicMath.add,
-  "-": basicMath.substract,
-  "*": basicMath.multiply,
-  "/": basicMath.divide,
-};
-
 function askForOperation() {
   middleman.question(
     "Choose a mathematical operation to perform ( +, -, *, /) ",
     (operation) => {
-      if (operation in validOperations) {
+      if (operation in basicMath.validOperations) {
         middleman.question("Enter first number", (firstNum) => {
           middleman.question("Enter second number", (secondNum) => {
             console.log(
-              `${firstNum} ${operation} ${secondNum} = ${validOperations[
+              `${firstNum} ${operation} ${secondNum} = ${basicMath.validOperations[
                 operation
               ](Number(firstNum), Number(secondNum))}`
             );
@@ -34,6 +27,9 @@ function askForOperation() {
             });
           });
         });
+      } else {
+        console.log("Please enter a valid operation");
+        askForOperation();
       }
     }
   );
